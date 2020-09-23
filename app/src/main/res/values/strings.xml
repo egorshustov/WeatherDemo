@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Погода</string>
+    <string name="fragment_city_list_title">Погода в городах</string>
+    <string name="fragment_add_city_title">Добавить город</string>
+    <string name="fragment_city_info_title">Информация по городу</string>
+
+    <string name="weather_api_key">639a492451849f7fcbb3d12950babde6</string>
+
+</resources>
