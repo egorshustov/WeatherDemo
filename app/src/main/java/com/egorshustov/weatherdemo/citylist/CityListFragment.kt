@@ -25,7 +25,7 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
     private fun setListeners() {
         binding.fabAddCity.setOnClickListener {
             findNavController().safeNavigate(
-                CityListFragmentDirections.actionCityListFragmentToAddCityFragment()
+                CityListFragmentDirections.actionCityListFragmentToAddCityDialogFragment()
             )
         }
     }

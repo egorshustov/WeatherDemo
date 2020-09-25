@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_city_list">
 
         <action
-            android:id="@+id/action_cityListFragment_to_addCityFragment"
-            app:destination="@id/addCityFragment" />
+            android:id="@+id/action_cityListFragment_to_addCityDialogFragment"
+            app:destination="@id/addCityDialogFragment" />
 
         <action
             android:id="@+id/action_cityListFragment_to_cityInfoFragment"
@@ -21,11 +21,11 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/addCityFragment"
-        android:name="com.egorshustov.weatherdemo.addcity.AddCityFragment"
+    <dialog
+        android:id="@+id/addCityDialogFragment"
+        android:name="com.egorshustov.weatherdemo.addcity.AddCityDialogFragment"
         android:label="@string/fragment_add_city_title"
-        tools:layout="@layout/fragment_add_city" />
+        tools:layout="@layout/dialog_add_city" />
 
     <fragment
         android:id="@+id/cityInfoFragment"
