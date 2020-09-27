@@ -3,15 +3,15 @@ package com.egorshustov.weatherdemo.citylist
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.egorshustov.weatherdemo.data.source.WeatherRepository
+import com.egorshustov.weatherdemo.domain.weather.RequestCurrentAndDailyWeatherByCoordinatesUseCase
 import kotlinx.coroutines.launch
 
 class CityListViewModel @ViewModelInject constructor(
-    weatherRepository: WeatherRepository
+    requestCurrentAndDailyWeatherByCoordinatesUseCase: RequestCurrentAndDailyWeatherByCoordinatesUseCase
 ) : ViewModel() {
     init {
         viewModelScope.launch {
-            weatherRepository.requestCurrentAndDailyWeatherByCoordinates(59.89, 30.26)
+            requestCurrentAndDailyWeatherByCoordinatesUseCase(59.89, 30.26)
         }
     }
 }
