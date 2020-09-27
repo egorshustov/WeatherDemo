@@ -10,5 +10,7 @@ interface WeatherLocalDataSource {
 
     suspend fun saveCurrentWeather(currentWeather: CurrentWeather)
 
+    suspend fun saveCurrentWeatherList(currentWeatherList: List<CurrentWeather>)
+
     suspend fun saveDailyWeatherList(cityId: Long, dailyWeatherList: List<DailyWeather>)
 }

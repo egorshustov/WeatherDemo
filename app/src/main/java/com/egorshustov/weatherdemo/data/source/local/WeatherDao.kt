@@ -15,6 +15,9 @@ interface WeatherDao {
     suspend fun insertCurrentWeather(currentWeather: CurrentWeather)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCurrentWeatherList(currentWeatherList: List<CurrentWeather>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDailyWeatherList(dailyWeatherList: List<DailyWeather>)
 
     @Query("DELETE from daily_weather where city_id = :cityId")

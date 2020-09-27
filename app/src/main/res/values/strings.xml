@@ -3,5 +3,5 @@
     <string name="fragment_city_list_title">Погода в городах</string>
     <string name="fragment_add_city_title">Добавить город</string>
     <string name="fragment_city_info_title">Информация по городу</string>
-
+    <string name="description_weather_icon">Иконка погоды</string>
 </resources>

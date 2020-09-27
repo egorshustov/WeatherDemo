@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CitiesDao {
+    @Query("select id from cities")
+    suspend fun getCitiesIds(): List<Long>
+
     @Transaction
     @Query("select * from cities order by name")
     fun getCitiesAndCurrentWeather(): Flow<List<CityAndCurrentWeather>>

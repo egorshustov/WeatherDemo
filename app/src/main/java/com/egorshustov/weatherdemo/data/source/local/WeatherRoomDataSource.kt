@@ -18,6 +18,9 @@ class WeatherRoomDataSource @Inject constructor(
     override suspend fun saveCurrentWeather(currentWeather: CurrentWeather) =
         withContext(ioDispatcher) { weatherDao.insertCurrentWeather(currentWeather) }
 
+    override suspend fun saveCurrentWeatherList(currentWeatherList: List<CurrentWeather>) =
+        withContext(ioDispatcher) { weatherDao.insertCurrentWeatherList(currentWeatherList) }
+
     override suspend fun saveDailyWeatherList(cityId: Long, dailyWeatherList: List<DailyWeather>) =
         withContext(ioDispatcher) { weatherDao.replaceDailyWeatherFor(cityId, dailyWeatherList) }
 }

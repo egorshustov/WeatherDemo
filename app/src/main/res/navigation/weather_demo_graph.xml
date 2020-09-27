@@ -31,6 +31,12 @@
         android:id="@+id/cityInfoFragment"
         android:name="com.egorshustov.weatherdemo.cityinfo.CityInfoFragment"
         android:label="@string/fragment_city_info_title"
-        tools:layout="@layout/fragment_city_info" />
+        tools:layout="@layout/fragment_city_info">
+
+        <argument
+            android:name="cityId"
+            app:argType="long" />
+
+    </fragment>
 
 </navigation>

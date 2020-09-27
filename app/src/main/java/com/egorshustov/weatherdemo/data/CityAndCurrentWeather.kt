@@ -10,5 +10,5 @@ data class CityAndCurrentWeather(
         parentColumn = "id",
         entityColumn = "city_id"
     )
-    val currentWeather: CurrentWeather
+    val currentWeather: CurrentWeather?
 )

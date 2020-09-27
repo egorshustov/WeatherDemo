@@ -5,9 +5,12 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.egorshustov.weatherdemo.R
+import com.egorshustov.weatherdemo.adapters.CityAndCurrentWeatherAdapter
 import com.egorshustov.weatherdemo.base.BaseFragment
 import com.egorshustov.weatherdemo.databinding.FragmentCityListBinding
+import com.egorshustov.weatherdemo.util.EventObserver
 import com.egorshustov.weatherdemo.util.safeNavigate
+import com.egorshustov.weatherdemo.util.showMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +22,14 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerCitiesAndCurrentWeather.adapter = CityAndCurrentWeatherAdapter(viewModel)
         setListeners()
+        setObservers()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.onCityListFragmentStarted()
     }
 
     private fun setListeners() {
@@ -28,5 +38,14 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
                 CityListFragmentDirections.actionCityListFragmentToAddCityDialogFragment()
             )
         }
+    }
+
+    private fun setObservers() = with(viewModel) {
+        message.observe(viewLifecycleOwner, EventObserver { context?.showMessage(it) })
+        openCityInfoCommand.observe(viewLifecycleOwner, EventObserver { cityId ->
+            findNavController().safeNavigate(
+                CityListFragmentDirections.actionCityListFragmentToCityInfoFragment(cityId)
+            )
+        })
     }
 }

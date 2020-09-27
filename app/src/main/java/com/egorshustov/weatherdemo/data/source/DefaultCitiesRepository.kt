@@ -11,6 +11,8 @@ class DefaultCitiesRepository @Inject constructor(
     private val citiesLocalDataSource: CitiesLocalDataSource
 ) : CitiesRepository {
 
+    override suspend fun getCitiesIds(): List<Long> = citiesLocalDataSource.getCitiesIds()
+
     override fun getCitiesAndCurrentWeather(): Flow<List<CityAndCurrentWeather>> =
         citiesLocalDataSource.getCitiesAndCurrentWeather()
 
