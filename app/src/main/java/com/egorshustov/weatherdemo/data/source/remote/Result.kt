@@ -14,7 +14,7 @@ sealed class Result<out R> {
             is Success<*> -> "Success[data=$data]"
             is Error -> when (exception.cause) {
                 is CustomException -> {
-                    exception.message.toString()
+                    exception.cause?.message.toString()
                 }
                 is ConnectException, is TimeoutException, is UnknownHostException -> {
                     "Ошибка соединения: отсутствует подключение к сети или сервер недоступен"

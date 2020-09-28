@@ -31,7 +31,7 @@ class WeatherRetrofitDataSource @Inject constructor(
                     .convertResponseBody<BaseErrorResponse>(response.errorBody())
                 var errorText = errorResponse?.message
                 if (errorText.isNullOrEmpty()) errorText = GET_CURRENT_WEATHER_FOR_CITIES_ERROR
-                return@withContext Result.Error(CustomException(errorText))
+                return@withContext Result.Error(Exception(CustomException(errorText)))
             }
         } catch (t: Throwable) {
             return@withContext Result.Error(Exception(t))
@@ -56,7 +56,7 @@ class WeatherRetrofitDataSource @Inject constructor(
                     .convertResponseBody<BaseErrorResponse>(response.errorBody())
                 var errorText = errorResponse?.message
                 if (errorText.isNullOrEmpty()) errorText = GET_CURRENT_WEATHER_FOR_CITY_ERROR
-                return@withContext Result.Error(CustomException(errorText))
+                return@withContext Result.Error(Exception(CustomException(errorText)))
             }
         } catch (t: Throwable) {
             return@withContext Result.Error(Exception(t))
@@ -83,7 +83,7 @@ class WeatherRetrofitDataSource @Inject constructor(
                     .convertResponseBody<BaseErrorResponse>(response.errorBody())
                 var errorText = errorResponse?.message
                 if (errorText.isNullOrEmpty()) errorText = GET_CURRENT_AND_DAILY_WEATHER
-                return@withContext Result.Error(CustomException(errorText))
+                return@withContext Result.Error(Exception(CustomException(errorText)))
             }
         } catch (t: Throwable) {
             return@withContext Result.Error(Exception(t))

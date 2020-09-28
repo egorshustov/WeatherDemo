@@ -5,6 +5,7 @@ import com.egorshustov.weatherdemo.data.source.local.CitiesLocalDataSource
 import com.egorshustov.weatherdemo.data.source.local.WeatherLocalDataSource
 import com.egorshustov.weatherdemo.data.source.remote.Result
 import com.egorshustov.weatherdemo.data.source.remote.WeatherRemoteDataSource
+import com.egorshustov.weatherdemo.util.toCityEntity
 import com.egorshustov.weatherdemo.util.toCurrentWeatherEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -64,7 +65,10 @@ class DefaultWeatherRepository @Inject constructor(
                 weatherApiKey
             )) {
             is Result.Success -> {
-                val result = currentWeatherForCityResult.data
+                val city = currentWeatherForCityResult.data.toCityEntity()
+                val currentWeather = currentWeatherForCityResult.data.toCurrentWeatherEntity()
+                citiesLocalDataSource.saveCity(city)
+                weatherLocalDataSource.saveCurrentWeather(currentWeather)
                 Result.Success(Unit)
             }
             is Result.Error -> {

@@ -4,4 +4,7 @@
     <string name="fragment_add_city_title">Добавить город</string>
     <string name="fragment_city_info_title">Информация по городу</string>
     <string name="description_weather_icon">Иконка погоды</string>
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Отмена</string>
+    <string name="text_city_name">Название города</string>
 </resources>
