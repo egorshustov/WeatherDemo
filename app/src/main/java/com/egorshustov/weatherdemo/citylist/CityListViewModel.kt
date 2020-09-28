@@ -9,6 +9,8 @@ import com.egorshustov.weatherdemo.domain.cities.GetCitiesIdsUseCase
 import com.egorshustov.weatherdemo.domain.weather.RequestCurrentWeatherForCitiesByIdsUseCase
 import com.egorshustov.weatherdemo.util.Event
 import com.egorshustov.weatherdemo.util.composeString
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -19,11 +21,15 @@ class CityListViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val citiesAndCurrentWeather: LiveData<List<CityAndCurrentWeather>> =
-        getCitiesAndCurrentWeatherUseCase().onEach {
-            if (it.isNotEmpty() && it.find { it.currentWeather != null } == null) {
-                requestCurrentWeatherForCitiesByIdsUseCase(it.map { it.city.id }.composeString())
+        getCitiesAndCurrentWeatherUseCase()
+            .onEach {
+                if (it.isNotEmpty() && it.find { it.currentWeather != null } == null) {
+                    requestCurrentWeatherForCitiesByIdsUseCase(it.map { it.city.id }
+                        .composeString())
+                }
             }
-        }.asLiveData()
+            .flowOn(Dispatchers.IO)
+            .asLiveData()
 
     private val _message = MutableLiveData<Event<String>>()
     val message: LiveData<Event<String>> = _message

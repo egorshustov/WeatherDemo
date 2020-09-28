@@ -12,8 +12,7 @@ class WeatherRoomDataSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : WeatherLocalDataSource {
 
-    override fun getDailyWeatherList(cityId: Long): Flow<List<DailyWeather>> =
-        weatherDao.getDailyWeatherList(cityId)
+    override fun getDailyWeatherList(): Flow<List<DailyWeather>> = weatherDao.getDailyWeatherList()
 
     override suspend fun saveCurrentWeather(currentWeather: CurrentWeather) =
         withContext(ioDispatcher) { weatherDao.insertCurrentWeather(currentWeather) }

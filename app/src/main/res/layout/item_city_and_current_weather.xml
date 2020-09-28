@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.egorshustov.weatherdemo.util.ExtensionsKt" />
+
         <variable
             name="cityandcurrentweather"
             type="com.egorshustov.weatherdemo.data.CityAndCurrentWeather" />
@@ -33,7 +35,7 @@
                 android:layout_height="50dp"
                 android:contentDescription="@string/description_weather_icon"
                 android:scaleType="centerCrop"
-                app:imageFromUrl="@{cityandcurrentweather.currentWeather.iconUrl}"
+                app:image_from_url="@{cityandcurrentweather.currentWeather.iconUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,6 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
+                        android:text="@{ExtensionsKt.getTemperatureString(cityandcurrentweather.currentWeather.temperature)}"
                         android:textSize="18sp"
                         tools:text="30.0°" />
 

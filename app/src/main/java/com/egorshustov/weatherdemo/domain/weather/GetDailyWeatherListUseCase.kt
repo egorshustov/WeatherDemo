@@ -7,6 +7,5 @@ import javax.inject.Inject
 
 class GetDailyWeatherListUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
 
-    operator fun invoke(cityId: Long): Flow<List<DailyWeather>> =
-        weatherRepository.getDailyWeatherList(cityId)
+    operator fun invoke(): Flow<List<DailyWeather>> = weatherRepository.getDailyWeatherList()
 }

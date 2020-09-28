@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface CitiesLocalDataSource {
 
+    suspend fun getCity(cityId: Long): City
+
     suspend fun getCitiesIds(): List<Long>
 
     fun getCitiesAndCurrentWeather(): Flow<List<CityAndCurrentWeather>>
-
-    fun getCityAndCurrentWeather(cityId: Long): Flow<CityAndCurrentWeather>
 
     suspend fun saveCity(city: City)
 }

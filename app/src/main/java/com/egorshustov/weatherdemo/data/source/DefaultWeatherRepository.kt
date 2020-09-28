@@ -7,6 +7,7 @@ import com.egorshustov.weatherdemo.data.source.remote.Result
 import com.egorshustov.weatherdemo.data.source.remote.WeatherRemoteDataSource
 import com.egorshustov.weatherdemo.util.toCityEntity
 import com.egorshustov.weatherdemo.util.toCurrentWeatherEntity
+import com.egorshustov.weatherdemo.util.toDailyWeatherEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -21,8 +22,8 @@ class DefaultWeatherRepository @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : WeatherRepository {
 
-    override fun getDailyWeatherList(cityId: Long): Flow<List<DailyWeather>> =
-        weatherLocalDataSource.getDailyWeatherList(cityId)
+    override fun getDailyWeatherList(): Flow<List<DailyWeather>> =
+        weatherLocalDataSource.getDailyWeatherList()
 
     override suspend fun requestCurrentWeatherForCitiesByIds(
         idsString: String,
@@ -96,7 +97,14 @@ class DefaultWeatherRepository @Inject constructor(
                 weatherApiKey
             )) {
             is Result.Success -> {
-                val result = currentAndDailyWeatherResult.data
+                val currentWeather =
+                    currentAndDailyWeatherResult.data.currentWeather?.toCurrentWeatherEntity(cityId)
+                val dailyWeatherList =
+                    currentAndDailyWeatherResult.data.dailyWeatherList?.map {
+                        it.toDailyWeatherEntity(cityId)
+                    }
+                currentWeather?.let { weatherLocalDataSource.saveCurrentWeather(it) }
+                dailyWeatherList?.let { weatherLocalDataSource.saveDailyWeatherList(cityId, it) }
                 Result.Success(Unit)
             }
             is Result.Error -> {

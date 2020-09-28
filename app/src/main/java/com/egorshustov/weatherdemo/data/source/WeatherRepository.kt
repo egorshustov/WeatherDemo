@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
 
-    fun getDailyWeatherList(cityId: Long): Flow<List<DailyWeather>>
+    fun getDailyWeatherList(): Flow<List<DailyWeather>>
 
     suspend fun requestCurrentWeatherForCitiesByIds(
         idsString: String,

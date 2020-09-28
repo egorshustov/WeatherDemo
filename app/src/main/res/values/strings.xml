@@ -4,7 +4,30 @@
     <string name="fragment_add_city_title">Добавить город</string>
     <string name="fragment_city_info_title">Информация по городу</string>
     <string name="description_weather_icon">Иконка погоды</string>
+
     <string name="text_ok">OK</string>
     <string name="text_cancel">Отмена</string>
     <string name="text_city_name">Название города</string>
+
+    <string name="text_air_temperature">Температура воздуха:</string>
+    <string name="text_temperature">Температура:</string>
+    <string name="text_feels_like">По ощущению:</string>
+    <string name="text_sunrise">Восход солнца</string>
+    <string name="text_sunset">Заход солнца</string>
+    <string name="text_pressure">Давление</string>
+    <string name="text_humidity">Влажность</string>
+    <string name="text_visibility">Видимость</string>
+    <string name="text_wind_speed">Скорость ветра</string>
+    <string name="text_wind_degree">Направление ветра</string>
+
+    <string name="text_weather_daily_forecast">Прогноз погоды по дням:</string>
+    <string name="text_night">Ночь:</string>
+    <string name="text_morning">Утро:</string>
+    <string name="text_day">День:</string>
+    <string name="text_evening">Вечер:</string>
+
+    <string name="text_percent">%s%%</string>
+    <string name="text_meters">%s м.</string>
+    <string name="text_meters_in_second">%s м/с</string>
+    <string name="text_degrees">%s°</string>
 </resources>

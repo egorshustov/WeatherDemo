@@ -12,14 +12,14 @@ class CitiesRoomDataSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : CitiesLocalDataSource {
 
+    override suspend fun getCity(cityId: Long): City =
+        withContext(ioDispatcher) { citiesDao.getCity(cityId) }
+
     override suspend fun getCitiesIds(): List<Long> =
         withContext(ioDispatcher) { citiesDao.getCitiesIds() }
 
     override fun getCitiesAndCurrentWeather(): Flow<List<CityAndCurrentWeather>> =
         citiesDao.getCitiesAndCurrentWeather()
-
-    override fun getCityAndCurrentWeather(cityId: Long): Flow<CityAndCurrentWeather> =
-        citiesDao.getCityAndCurrentWeather(cityId)
 
     override suspend fun saveCity(city: City) =
         withContext(ioDispatcher) { citiesDao.insertCity(city) }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.egorshustov.weatherdemo.citylist.CityListViewModel
 import com.egorshustov.weatherdemo.data.CityAndCurrentWeather
 import com.egorshustov.weatherdemo.databinding.ItemCityAndCurrentWeatherBinding
+import com.egorshustov.weatherdemo.util.getTemperatureString
 
 class CityAndCurrentWeatherAdapter(private val viewModel: CityListViewModel) :
     ListAdapter<CityAndCurrentWeather, CityAndCurrentWeatherAdapter.ViewHolder>(
@@ -26,11 +27,7 @@ class CityAndCurrentWeatherAdapter(private val viewModel: CityListViewModel) :
         fun bind(viewModel: CityListViewModel, item: CityAndCurrentWeather) = with(binding) {
             viewmodel = viewModel
             cityandcurrentweather = item
-            binding.textTemperature.text = if (item.currentWeather?.temperature == null) {
-                ""
-            } else {
-                String.format("%.1f", item.currentWeather.temperature) + "°"
-            }
+            binding.textTemperature.text = item.currentWeather?.temperature.getTemperatureString()
             executePendingBindings()
         }
 

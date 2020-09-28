@@ -7,16 +7,16 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CitiesDao {
+
+    @Query("select * from cities where id = :cityId")
+    suspend fun getCity(cityId: Long): City
+
     @Query("select id from cities")
     suspend fun getCitiesIds(): List<Long>
 
     @Transaction
     @Query("select * from cities order by name")
     fun getCitiesAndCurrentWeather(): Flow<List<CityAndCurrentWeather>>
-
-    @Transaction
-    @Query("select * from cities where id = :cityId")
-    fun getCityAndCurrentWeather(cityId: Long): Flow<CityAndCurrentWeather>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCity(city: City)

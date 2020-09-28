@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface WeatherDao {
 
-    @Query("select * from daily_weather where city_id = :cityId order by date_time_unix_seconds")
-    fun getDailyWeatherList(cityId: Long): Flow<List<DailyWeather>>
+    @Query("select * from daily_weather order by date_time_unix_seconds")
+    fun getDailyWeatherList(): Flow<List<DailyWeather>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCurrentWeather(currentWeather: CurrentWeather)

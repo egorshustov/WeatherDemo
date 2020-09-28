@@ -10,6 +10,9 @@ import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.roundToInt
 
 enum class MessageLength { SHORT, LONG }
 
@@ -42,4 +45,31 @@ fun List<Long>.composeString(): String {
     var result = ""
     forEach { result += "$it," }
     return result.dropLast(1)
+}
+
+fun Double?.getTemperatureString(): String = if (this == null || this == 0.0) {
+    ""
+} else {
+    String.format("%.1f", this) + "°"
+}
+
+fun Long.getDateText(): String {
+    if (this == 0L) return ""
+    val searchCalendar =
+        Calendar.getInstance().apply { timeInMillis = this@getDateText * MILLIS_IN_SECOND }
+    val formatPattern = "E, d MMM yyyy"
+    return SimpleDateFormat(formatPattern, Locale.getDefault()).format(searchCalendar.time)
+}
+
+fun Long.getTimeText(): String {
+    if (this == 0L) return ""
+    val searchCalendar =
+        Calendar.getInstance().apply { timeInMillis = this@getTimeText * MILLIS_IN_SECOND }
+    val formatPattern = "HH:mm:ss"
+    return SimpleDateFormat(formatPattern, Locale.getDefault()).format(searchCalendar.time)
+}
+
+fun Int.getPressureText(): String {
+    if (this == 0) return ""
+    return (this / 1.333).roundToInt().toString() + " мм рт. ст."
 }

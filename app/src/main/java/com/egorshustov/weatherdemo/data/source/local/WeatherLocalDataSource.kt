@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherLocalDataSource {
 
-    fun getDailyWeatherList(cityId: Long): Flow<List<DailyWeather>>
+    fun getDailyWeatherList(): Flow<List<DailyWeather>>
 
     suspend fun saveCurrentWeather(currentWeather: CurrentWeather)
 
