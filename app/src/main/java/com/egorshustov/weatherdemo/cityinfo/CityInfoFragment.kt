@@ -9,6 +9,7 @@ import com.egorshustov.weatherdemo.adapters.DailyWeatherAdapter
 import com.egorshustov.weatherdemo.base.BaseFragment
 import com.egorshustov.weatherdemo.databinding.FragmentCityInfoBinding
 import com.egorshustov.weatherdemo.util.EventObserver
+import com.egorshustov.weatherdemo.util.NetworkNotifier
 import com.egorshustov.weatherdemo.util.showMessage
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,5 +31,9 @@ class CityInfoFragment : BaseFragment<CityInfoViewModel, FragmentCityInfoBinding
 
     private fun setObservers() = with(viewModel) {
         message.observe(viewLifecycleOwner, EventObserver { context?.showMessage(it) })
+        NetworkNotifier.networkRestoredEvent.observe(viewLifecycleOwner, EventObserver {
+            context?.showMessage(getString(R.string.text_connection_restored))
+            viewModel.onNetworkRestored()
+        })
     }
 }

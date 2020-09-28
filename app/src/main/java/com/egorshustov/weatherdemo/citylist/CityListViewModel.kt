@@ -37,7 +37,15 @@ class CityListViewModel @ViewModelInject constructor(
     private val _openCityInfoCommand = MutableLiveData<Event<Long>>()
     val openCityInfoCommand: LiveData<Event<Long>> = _openCityInfoCommand
 
-    fun onCityListFragmentStarted() {
+    fun onCityListFragmentStarted() = requestCurrentWeatherForCities()
+
+    fun onCityClicked(cityId: Long) {
+        _openCityInfoCommand.value = Event(cityId)
+    }
+
+    fun onNetworkRestored() = requestCurrentWeatherForCities()
+
+    private fun requestCurrentWeatherForCities() {
         viewModelScope.launch {
             val citiesIds = getCitiesIdsUseCase()
             if (citiesIds.isNotEmpty()) {
@@ -45,9 +53,5 @@ class CityListViewModel @ViewModelInject constructor(
                 if (requestResult is Result.Error) _message.value = Event(requestResult.getString())
             }
         }
-    }
-
-    fun onCityClicked(cityId: Long) {
-        _openCityInfoCommand.value = Event(cityId)
     }
 }

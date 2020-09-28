@@ -47,6 +47,15 @@ class CityInfoViewModel @ViewModelInject constructor(
 
     fun onCityIdObtained(cityId: Long) {
         this.cityId = cityId
+        requestCurrentAndDailyWeather(cityId)
+    }
+
+    fun onNetworkRestored() {
+        val currentCityId = cityId
+        if (currentCityId != NO_VALUE) requestCurrentAndDailyWeather(currentCityId)
+    }
+
+    private fun requestCurrentAndDailyWeather(cityId: Long) {
         viewModelScope.launch {
             val city = getCityUseCase(cityId)
             val requestResult = requestCurrentAndDailyWeatherByCoordinatesUseCase(

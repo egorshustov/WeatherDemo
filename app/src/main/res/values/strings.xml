@@ -30,4 +30,6 @@
     <string name="text_meters">%s м.</string>
     <string name="text_meters_in_second">%s м/с</string>
     <string name="text_degrees">%s°</string>
+
+    <string name="text_connection_restored">Подключение восстановлено. Обновление данных…</string>
 </resources>

@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.egorshustov.weatherdemo.util.NetworkNotifier
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +19,16 @@ class WeatherDemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_demo)
         setupNavigation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        NetworkNotifier.turnOnUpdates(this)
+    }
+
+    override fun onPause() {
+        NetworkNotifier.turnOffUpdates()
+        super.onPause()
     }
 
     private fun setupNavigation() {

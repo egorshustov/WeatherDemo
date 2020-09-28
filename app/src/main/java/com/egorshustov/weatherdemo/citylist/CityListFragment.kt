@@ -9,6 +9,7 @@ import com.egorshustov.weatherdemo.adapters.CityAndCurrentWeatherAdapter
 import com.egorshustov.weatherdemo.base.BaseFragment
 import com.egorshustov.weatherdemo.databinding.FragmentCityListBinding
 import com.egorshustov.weatherdemo.util.EventObserver
+import com.egorshustov.weatherdemo.util.NetworkNotifier
 import com.egorshustov.weatherdemo.util.safeNavigate
 import com.egorshustov.weatherdemo.util.showMessage
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +47,10 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
             findNavController().safeNavigate(
                 CityListFragmentDirections.actionCityListFragmentToCityInfoFragment(cityId)
             )
+        })
+        NetworkNotifier.networkRestoredEvent.observe(viewLifecycleOwner, EventObserver {
+            context?.showMessage(getString(R.string.text_connection_restored))
+            viewModel.onNetworkRestored()
         })
     }
 }
