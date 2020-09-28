@@ -27,6 +27,7 @@ interface WeatherRepository {
     ): Result<Unit>
 
     suspend fun requestCurrentAndDailyWeatherByCoordinates(
+        cityId: Long,
         latitude: Double,
         longitude: Double,
         excludeFields: String = EXCLUDE_FIELDS,

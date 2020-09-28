@@ -74,6 +74,7 @@ class DefaultWeatherRepository @Inject constructor(
     }
 
     override suspend fun requestCurrentAndDailyWeatherByCoordinates(
+        cityId: Long,
         latitude: Double,
         longitude: Double,
         excludeFields: String,

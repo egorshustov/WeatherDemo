@@ -11,6 +11,7 @@ import javax.inject.Inject
 class RequestCurrentAndDailyWeatherByCoordinatesUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
 
     suspend operator fun invoke(
+        cityId: Long,
         latitude: Double,
         longitude: Double,
         excludeFields: String = EXCLUDE_FIELDS,
@@ -18,6 +19,6 @@ class RequestCurrentAndDailyWeatherByCoordinatesUseCase @Inject constructor(priv
         responseLanguage: String = RUSSIAN_LANGUAGE,
         weatherApiKey: String = WEATHER_API_KEY
     ): Result<Unit> = weatherRepository.requestCurrentAndDailyWeatherByCoordinates(
-        latitude, longitude, excludeFields, measureUnits, responseLanguage, weatherApiKey
+        cityId, latitude, longitude, excludeFields, measureUnits, responseLanguage, weatherApiKey
     )
 }

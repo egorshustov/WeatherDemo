@@ -19,7 +19,6 @@ data class DailyWeather(
     val sunsetUnixSeconds: Long,
     val pressure: Int,
     val humidity: Int,
-    val visibility: Int,
     @ColumnInfo(name = "wind_speed")
     val windSpeed: Double,
     @ColumnInfo(name = "wind_degree")
